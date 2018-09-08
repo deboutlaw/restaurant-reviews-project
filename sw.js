@@ -7,7 +7,6 @@ self.addEventListener('install', e=>{
     .then(cache =>{
       console.log('service worker: caching files');
       return cache.addAll([
-
           '/js/main.js',
           '/js/dbhelper.js',
           '/js/restaurant_info.js',
@@ -25,7 +24,6 @@ self.addEventListener('install', e=>{
           '/img/10.jpg',
           '/index.html',
           '/restaurant.html'
-
         ]);
     })
   );
@@ -53,7 +51,7 @@ self.addEventListener('fetch', e => {
   console.log('service worker: fetching');
       e.respondWith(
         caches.match(e.request)
-        .then(response=> {
+        .then(response => {
           return response || fetch(e.request);
         })
       );
@@ -63,8 +61,8 @@ self.addEventListener('fetch', e => {
 
 
 
-self.addEventListener('message', function(event) {
+/*self.addEventListener('message', function(event) {
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
-});
+});*/
