@@ -51,15 +51,16 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   console.log('service worker: fetching');
-  const requestUrl = new URL(e.request.url);
-    if (requestUrl.origin === location.origin) {
       e.respondWith(
         caches.match(e.request)
         .then(response=> {
           return response || fetch(e.request);
-        }));
-    }
+        })
+      );
   });
+
+
+
 
 
 self.addEventListener('message', function(event) {
