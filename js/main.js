@@ -4,7 +4,7 @@ let restaurants,
 var newMap
 var markers = []
 
-
+//register service worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', ()=> {
       navigator.serviceWorker
@@ -13,7 +13,6 @@ var markers = []
       .catch(err=> console.log('service worker: not registered'))
     });
   }
-
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
