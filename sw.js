@@ -7,6 +7,7 @@ self.addEventListener('install', e => {
     .then(cache => {
       console.log('service worker: caching files');
       return cache.addAll([
+          '/',
           '/js/main.js',
           '/js/dbhelper.js',
           '/js/restaurant_info.js',
@@ -50,7 +51,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   console.log('service worker: fetching');
       e.respondWith(
-        caches.match(e.request)
+        caches.match(e.request,{ignoreSearch: true})
         .then(response => {
           return response || fetch(e.request);
         })
