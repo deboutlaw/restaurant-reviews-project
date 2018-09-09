@@ -1,10 +1,10 @@
 
 let cacheName = 'rest-v1';
 
-self.addEventListener('install', e=>{
+self.addEventListener('install', e => {
   console.log('service worker: installed');
   e.waitUntil(caches.open(cacheName)
-    .then(cache =>{
+    .then(cache => {
       console.log('service worker: caching files');
       return cache.addAll([
           '/js/main.js',
@@ -58,8 +58,8 @@ self.addEventListener('fetch', e => {
   });
 
 
-/*self.addEventListener('message', function(event) {
+self.addEventListener('message', function(event) {
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
-});*/
+});
