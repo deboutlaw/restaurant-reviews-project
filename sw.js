@@ -48,7 +48,7 @@ self.addEventListener('activate', e => {
 });
 
 
-self.addEventListener('fetch', e => {
+/*self.addEventListener('fetch', e => {
   console.log('service worker: fetching');
       e.respondWith(
         caches.match(e.request,{ignoreSearch: true})
@@ -56,7 +56,19 @@ self.addEventListener('fetch', e => {
           return response || fetch(e.request);
         })
       );
-  });
+  });*/
+  self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request, {ignoreSearch: true}).then(response => {
+      return response || fetch(e.request).then(response => {
+        return caches.open('v1').then(cache=> {
+          cache.put(e.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
+});
 
 
 self.addEventListener('message', function(event) {
